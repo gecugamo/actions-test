@@ -23,5 +23,5 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
         if: ${{ github.event.inputs.confirmation == true }}
       - name: Fail If No Confirmation
-        run: exit 1
-        if: ${{ github.event.inputs.confirmation != true }}
+        run: echo 'Please check the confirmation checkbox.' && exit 1
+        if: ${{ github.event.inputs.confirmation == true }}
