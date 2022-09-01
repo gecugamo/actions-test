@@ -11,9 +11,11 @@ jobs:
     name: Merge Staging to Main
     runs-on: ubuntu-22.04
     steps:
+      - name: Check Confirmation
+        run: exit 1
+        if: ${{ github.event.inputs.confirmation != true }}
       - name: Checkout
         uses: actions/checkout@v3
-        if: ${{ github.event.inputs.confirmation == true }}
       - name: Merge
         uses: everlytic/branch-merge@1.1.3
         with:
@@ -21,7 +23,3 @@ jobs:
           target_branch: 'main'
           commit_message_template: '[Workflow Dispatch] Merged {source_ref} into {target_branch}'
           github_token: ${{ secrets.GITHUB_TOKEN }}
-        if: ${{ github.event.inputs.confirmation == true }}
-      - name: Fail If No Confirmation
-        run: echo 'Please check the confirmation checkbox.' && exit 1
-        if: ${{ github.event.inputs.confirmation == true }}
