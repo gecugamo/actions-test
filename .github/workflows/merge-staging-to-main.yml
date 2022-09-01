@@ -1,0 +1,21 @@
+name: Merge Staging to Main
+on:
+  workflow_dispatch:
+    inputs:
+      confirmation:
+        type: boolean
+        required: true
+        default: false
+        description: 'I understand that running this workflow will trigger a production deployment.'
+jobs:
+  merge-branch:
+    name: Merge Staging to Main
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - uses: everlytic/branch-merge@1.1.3
+        with:
+          source_ref: 'staging'
+          target_branch: 'main'
+          commit_message_template: '[Workflow Dispatch] Merged {source_ref} into {target_branch}'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
