@@ -22,3 +22,6 @@ jobs:
           commit_message_template: '[Workflow Dispatch] Merged {source_ref} into {target_branch}'
           github_token: ${{ secrets.GITHUB_TOKEN }}
         if: ${{ github.event.inputs.confirmation == true }}
+      - name: Fail If No Confirmation
+        run: exit 1
+        if: ${{ github.event.inputs.confirmation == true }}
