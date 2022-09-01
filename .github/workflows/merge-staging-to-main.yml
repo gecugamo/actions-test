@@ -16,7 +16,7 @@ jobs:
         with:
           script: |
               core.setFailed('Please check the box to confirm production deployment.')
-        if: ${{ github.event.inputs.confirmation != true }}
+        if: ${{ inputs.confirmation != true }}
       - name: Checkout
         uses: actions/checkout@v3
         if: success()
