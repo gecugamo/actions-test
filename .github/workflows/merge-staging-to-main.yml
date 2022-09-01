@@ -24,4 +24,4 @@ jobs:
         if: ${{ github.event.inputs.confirmation == true }}
       - name: Fail If No Confirmation
         run: exit 1
-        if: ${{ github.event.inputs.confirmation == true }}
+        if: ${{ github.event.inputs.confirmation != true }}
